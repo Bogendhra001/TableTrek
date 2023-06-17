@@ -1,6 +1,7 @@
 import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useEffect } from "react";
+import Restaurant from "./restraunt_interface";
 
 export default function InitialScreen() {
     
@@ -18,7 +19,8 @@ export default function InitialScreen() {
 
     return(
         <div className="initial-screen-container">
-            This is a text
+            {/* This is a text */}
+            <Restaurant></Restaurant>
         </div>
     )
 }
