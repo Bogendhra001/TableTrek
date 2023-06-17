@@ -5,7 +5,7 @@ import React,{ useState } from "react";
 import './interface.css';
 
 
-export default function Restaurant(){
+export default function Booking(props){
 
     const getData = async () => {
         await getDocs(collection(db, "restaurant_details"))
@@ -19,13 +19,15 @@ export default function Restaurant(){
         getData();
     }, [] )
 
-    const [style, setStyle] = useState('block');
+    const [style, setStyle] = useState('none');
     const hide = () => {
         setStyle('none');
     };
     const show=()=>{
         setStyle('block');
     }
+    
+    console.log("Booking Screen",props.bookdata);
 
     return(
         <div>
