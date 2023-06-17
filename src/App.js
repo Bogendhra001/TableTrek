@@ -16,7 +16,13 @@ function App() {
 
   const name = "Hello";
   const [data, setData] = useState({});
+  const [bookdata,setBookdata]=useState([]);
 
+  const passDatatobooking=(bookdata)=>{
+      console.log("real data");
+      console.log(bookdata);
+      setBookdata(bookdata);
+  }
   const passData = (data) => {
     console.log("data");
     setData(data);
@@ -27,7 +33,7 @@ function App() {
       <Routes>
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
-        <Route path='/' Component={InitialScreen} />
+        <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
       </Routes>
     </Router>
   );
