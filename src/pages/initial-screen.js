@@ -62,7 +62,7 @@ export default function InitialScreen(props) {
             <p>Location: {l[10]}</p>
             <p>Phone no: {l[8]}</p>
             <p>Email: {l[7]}</p>
-            <button onClick={() => passdatatobooking(l)}>Reserve</button>
+            <button  class='initial-button' onClick={() => passdatatobooking(l)}>Reserve</button>
           </div>
         </div>
       </div>
