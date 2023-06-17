@@ -4,7 +4,8 @@ import { useEffect } from "react";
 import React, { useState } from 'react';
 import "./initial-screen.css";
 
-export default function InitialScreen() {
+
+export default function InitialScreen(props) {
   const [array, setArray] = useState([]);
   const getData = async () => {
     await getDocs(collection(db, "restaurant_details"))
@@ -30,6 +31,9 @@ export default function InitialScreen() {
         console.log(main_array);
       });
   };
+ function passdatatobooking (array){
+    props.passDatatobooking(array);
+  }
 
   useEffect(() => {
     getData();
@@ -50,7 +54,7 @@ export default function InitialScreen() {
             <p>Location: {l[10]}</p>
             <p>Phone no: {l[8]}</p>
             <p>Email: {l[7]}</p>
-            <button onClick={}>Reserve</button>
+            <button onClick={() => passdatatobooking(l)}>Reserve</button>
           </div>
         </div>
       </div>
