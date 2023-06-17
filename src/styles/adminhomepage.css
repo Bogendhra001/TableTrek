@@ -1,0 +1,21 @@
+.admin-header {
+    height: 5rem;
+    display: flex;
+    background-color: #e4e4e4;
+}
+
+.admin-nav-links {
+    display: flex;
+    width: 30%;
+    margin: auto;
+    justify-content: space-between;
+}
+
+.nav-btns-admin {
+    border-bottom: blue 2px solid;
+    width: fit-content;
+}
+
+.nav-btns-admin:hover {
+    cursor: pointer;
+}
