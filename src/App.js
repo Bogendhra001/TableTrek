@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import Admin from './pages/admin';
 import EditRest from './pages/adminEditRest';
 import { useState } from 'react';
+import Booking from './pages/Booking';
 
 function App() {
 
@@ -34,6 +35,7 @@ function App() {
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
+        <Route path="/booking" Component={() => <Booking bookdata={bookdata} />} /> 
       </Routes>
     </Router>
   );

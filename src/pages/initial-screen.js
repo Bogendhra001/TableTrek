@@ -2,10 +2,11 @@ import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useEffect } from "react";
 
-import Restaurant from "./restraunt_interface";
+import Booking from "./Booking";
 
 import React, { useState } from 'react';
 import "./initial-screen.css";
+import { useNavigate, useNavigation } from "react-router";
 
 
 
@@ -35,8 +36,11 @@ export default function InitialScreen(props) {
         console.log(main_array);
       });
   };
+ 
+ const navigate=useNavigate();
  function passdatatobooking (array){
     props.passDatatobooking(array);
+    navigate('/booking');
   }
 
   useEffect(() => {
@@ -65,9 +69,22 @@ export default function InitialScreen(props) {
     </li>
   ));
 
+  const [style, setStyle] = useState('none');
+    const hide = () => {
+        setStyle('none');
+    };
+    const show=()=>{
+        setStyle('block');
+    }
+
   return (
     <div className="initial-screen-container">
-      <div className="title">TABLE TREK</div>
+      {/* <div className="title">TABLE TREK</div> */}
+      <div class="sideBar" id="sidebarBox" style={{display:style}}>
+            <img class="x-btn" src='x.png' alt="Menu" onClick={hide}></img>
+                <p>Home</p><p>Manage Reservations</p><p>About Us</p><p>Contact Us</p>
+            </div>
+            <div class="head"><img class="menu-btn" src='menu.png' alt="Menu" onClick={show} ></img><div class="head-text"><h1>TableTrek</h1></div></div>
       <div className="main">
         {array.length > 0 ? (
           <ul className="list-group">

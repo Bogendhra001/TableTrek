@@ -34,9 +34,9 @@
     /* text-align: center; */
     font-size:x-large;
     padding: 2vh;
-    position: absolute;
+    position: fixed;
     z-index: 10;
-    display: block;
+    display: none;
 }
 
 
