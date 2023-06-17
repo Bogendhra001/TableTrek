@@ -1,8 +1,12 @@
 import { addDoc, getDocs, collection } from "@firebase/firestore";
 import { db } from "../firebase";
 import { useEffect } from "react";
+
+import Restaurant from "./restraunt_interface";
+
 import React, { useState } from 'react';
 import "./initial-screen.css";
+
 
 
 export default function InitialScreen(props) {
