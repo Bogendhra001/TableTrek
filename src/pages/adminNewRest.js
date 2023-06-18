@@ -1,9 +1,10 @@
 import { useState, useEffect } from "react";
 import "../styles/adminEditRest.css"
-import { addDoc, collection } from "firebase/firestore";
+import { addDoc, collection, updateDoc } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase";
 import { useNavigate } from "react-router-dom";
+import { getStorage, ref, uploadBytes } from "firebase/storage";
 
 export default function NewRest() {
 
@@ -13,13 +14,13 @@ export default function NewRest() {
     const [rest_phone, set_rest_phone] = useState("");
     const [rest_email, set_rest_email] = useState("");
     const [rest_rating, set_rest_rating] = useState("");
-    const [total_tables, set_total_tables] = useState("");
     const [type_2_tables, set_type_2_tables] = useState("");
     const [type_4_tables, set_type_4_tables] = useState("");
     const [opening_hrs, set_opening_hrs] = useState("");
     const [closing_hrs, set_closing_hrs] = useState("");
     const [temp_city, set_temp_city] = useState("");
     const [cities, set_cities] = useState([]);
+    const [file, setFile] = useState("");
 
     const append_place = () => {
         set_cities((cities) => [...cities, temp_city]);
@@ -47,17 +48,34 @@ export default function NewRest() {
         rest_name: rest_name,
         rest_location: cities,
         rest_rating: rest_rating,
-        total_tables: total_tables,
+        total_tables: Number(type_2_tables) + Number(type_4_tables),
         type_2_tables: type_2_tables,
         type_4_tables: type_4_tables
     }
 
 
+    const handleImageUpload = async (file, customName) => {
+        try {
+          const storageRef = ref(storage, `images/${customName}`);
+          await uploadBytes(storageRef, file);
+          console.log("Image uploaded successfully.");
+        } catch (error) {
+          console.error("Error uploading image:", error);
+        }
+      };
+
     const navigate = useNavigate();
-    const addDataFireStore = () => {
+    const storage = getStorage();
+    const addDataFireStore = async () => {
         const docRef = collection(db, "restaurant_details");
         addDoc(docRef, newData)
-            .then(docRef => {
+            .then(doct => {
+                console.log(doct.id);
+                const ref = doc(db, "restaurant_details", doct.id);
+                const id = { rest_id: String(doct.id) };
+                updateDoc(ref, id)
+                    .then(doc1 => { console.log("Updated id") })
+                handleImageUpload(file, doct.id);
                 console.log("Success");
                 navigate("/highprevperson");
             })
@@ -92,10 +110,10 @@ export default function NewRest() {
                     })
                 }
                 </div>
+                <label className="inp-labels-admin">Upload image</label>
+                <input type="file" onChange={(e) => { setFile(e.target.files[0]) }} accept="/image/*" />
                 <label className="inp-labels-admin">Restaurant rating:</label>
                 <input type="text" placeholder="Enter rating" defaultValue={rest_rating} onChange={(e) => set_rest_rating(e.target.value)} />
-                <label className="inp-labels-admin">Total tables:</label>
-                <input type="number" placeholder="Total tables" defaultValue={total_tables} onChange={(e) => set_total_tables(e.target.value)} />
                 <label className="inp-labels-admin">Type 2 tables:</label>
                 <input type="number" placeholder="Total tables" defaultValue={type_2_tables} onChange={(e) => set_type_2_tables(e.target.value)} />
                 <label className="inp-labels-admin">Type 4 tables:</label>
