@@ -5,7 +5,9 @@ import Admin from './pages/admin';
 import EditRest from './pages/adminEditRest';
 import { useState } from 'react';
 import Booking from './pages/Booking';
+import Details from './pages/user_details';
 import NewRest from './pages/adminNewRest';
+
 
 function App() {
 
@@ -33,6 +35,7 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/user_details' Component={Details}/>
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
