@@ -3,6 +3,7 @@ import "../styles/adminEditRest.css"
 import { addDoc, collection } from "firebase/firestore";
 import { doc } from "firebase/firestore";
 import { db } from "../firebase";
+import { useNavigate } from "react-router-dom";
 
 export default function NewRest() {
 
@@ -51,24 +52,14 @@ export default function NewRest() {
         type_4_tables: type_4_tables
     }
 
+
+    const navigate = useNavigate();
     const addDataFireStore = () => {
         const docRef = collection(db, "restaurant_details");
         addDoc(docRef, newData)
             .then(docRef => {
                 console.log("Success");
-                set_rest_name("");
-                set_rest_desc("");
-                set_cuisine("");
-                set_rest_phone("");
-                set_rest_email("");
-                set_rest_rating("");
-                set_total_tables("");
-                set_type_2_tables("");
-                set_type_4_tables("");
-                set_opening_hrs("");
-                set_closing_hrs("");
-                set_temp_city("");
-                set_cities([]);
+                navigate("/highprevperson");
             })
             .catch(error => {
                 console.log(error)
