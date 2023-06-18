@@ -87,7 +87,9 @@
 .ff button{
     margin-left: 45%;
 }
-
+.stmt{
+    margin-left: 15%;
+}
 .imageR{
     width: 95%;
     padding: 1rem 1rem 0rem 1rem;
@@ -95,4 +97,8 @@
 .Restuarant h1{
     margin-top: 0.2rem;
 
+}
+
+.menu-btns:hover {
+    cursor: pointer;
 }

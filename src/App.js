@@ -7,6 +7,9 @@ import { useState } from 'react';
 import Booking from './pages/Booking';
 import Details from './pages/user_details';
 import NewRest from './pages/adminNewRest';
+
+import SlotBook from './pages/SlotBooking';
+
 import Confirmation from './pages/notification';
 
 
@@ -23,7 +26,11 @@ function App() {
   const name = "Hello";
   const [data, setData] = useState({});
   const [bookdata,setBookdata]=useState([]);
+
+  const [sdata,setSdata]=useState([]);
+  const [bdata,setBdata]=useState([]);
   const [userdata,setUserdata]=useState([]);
+
 
   const passDatatobooking=(bookdata)=>{
       console.log("real data");
@@ -39,6 +46,18 @@ function App() {
     console.log("app.js",userdata);
   }
 
+const passSlotdata=(sdata)=>{
+  setSdata(sdata);
+  console.log('App.js',sdata);
+}
+
+const passBookinginfo=(bdata)=>{
+  setBookdata(bdata);
+
+}
+
+console.log("Bdata",bdata);
+
   return (
     <Router>
       <Routes>
@@ -46,7 +65,8 @@ function App() {
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
-        <Route path="/booking" Component={() => <Booking bookdata={bookdata} />} /> 
+        <Route path="/booking" Component={() => <Booking bookdata={bookdata} passSlotdata={passSlotdata}/>} /> 
+        <Route path="/slotselect" Component={()=><SlotBook slotdata={sdata} passBookinginfo={passBookinginfo}/>}/>
         <Route path="/highprevperson/newrest" Component={() => <NewRest />} /> 
         <Route path='/notification' Component={() => <Confirmation userdata={userdata}/>}/>
       </Routes>
