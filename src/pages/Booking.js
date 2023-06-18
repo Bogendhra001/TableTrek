@@ -7,7 +7,7 @@ import './interface.css';
 import { json } from "react-router-dom";
 import { useNavigate, useNavigation } from "react-router";
 
-import { useNavigate } from "react-router-dom";
+// import { useNavigate } from "react-router-dom";
 
 
 
@@ -65,7 +65,7 @@ export default function Booking(props){
         
     }
 
-    const navigate = useNavigate();
+    // const navigate = useNavigate();
     const navToHome = () => {
         navigate('/');
     }
