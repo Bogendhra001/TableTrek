@@ -4,6 +4,7 @@ import { useEffect } from "react";
 import React,{ useState } from "react";
 import './interface.css';
 import { json } from "react-router-dom";
+import { useNavigate, useNavigation } from "react-router";
 
 
 export default function Booking(props){
@@ -37,6 +38,28 @@ export default function Booking(props){
         // console.log(window.localStorage(getItem('main')));
     }
 
+    // const slotdetails=[];
+    // slotdetails.push(document.getElementById('guest').value);
+    // slotdetails.push(document.getElementById('date').value);
+    // slotdetails.push(document.getElementById('time').value);
+
+    const navigate=useNavigate();
+
+    // const [value,setValue]= useState([]);
+
+    const [date,setDate]=useState(null);
+    const [time,setTime]=useState(null);
+
+    // console.log(date,time);
+
+    function receiveSlotdata(date,time,bookdata){
+        // console.log("BB",bookdata);
+        bookdata.push(date);
+        bookdata.push(time);
+        props.passSlotdata(bookdata);
+        navigate("/slotselect");
+        
+    }
 
     return(
         <div className="bg">
@@ -47,36 +70,24 @@ export default function Booking(props){
             <div className="head1"><img className="menu-btn" src='menuW.png' alt="Menu" onClick={show} ></img><div className="head-text1"><h1 >TableTrek</h1></div></div>
             <div className="Container">
                 <div className="Restuarant">
-                    <img src="reboot.jpg" className="imageR"></img>
+                    <img src={props.bookdata[5]} className="imageR"></img>
                     <h1 align="center">{props.bookdata[0]}</h1>
                 </div>
                 <div className="ff">
                     <form >
-                    <label for="date">Date: </label><input type="date" class="date" id="date"/><br></br>
-                    <label for="number">Guests:</label>
-                    <select>
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="6">6</option>
-                        <option value="7">7</option>
-                        <option value="8">8</option>
-                        <option value="9">9</option>
-                    </select>
-                    <br></br>
-                    <label for="time">Time:</label><select class="time">
+                    <label for="date">Date: </label><input type="date" class="date" id="date" onChange={(e)=>setDate(e.target.value)}/><br></br>                    
+                    <label for="time">Time:</label><select class="time" onChange={(e)=>setTime(e.target.value)}>
+                        <option>select</option>
                         {
                             A.map((i)=>{
                                 return(
-                                    <option value={i}>{8+i}:00</option>
+                                    <option value={8+i}>{8+i}:00</option>
                                 )
                             })
 
                         }
                     </select><br></br><br></br>
-                    <button onClick='{}'>Check Availability</button>
+                    <button onClick={()=>receiveSlotdata(date,time,props.bookdata)}>Check Availability</button>
                     </form>
                 </div>
             </div>
