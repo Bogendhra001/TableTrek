@@ -1,21 +1,41 @@
+import { useState, useEffect } from "react";
+import "../styles/adminEditRest.css"
+import { addDoc, collection } from "firebase/firestore";
+import { doc } from "firebase/firestore";
 import { db } from "../firebase";
-import "../styles/adminEditRest.css";
-import { useState } from "react";
-import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
-export default function EditRest(props) {
+export default function NewRest() {
 
-    const [rest_name, set_rest_name] = useState(props.data.rest_name);
-    const [rest_desc, set_rest_desc] = useState(props.data.rest_desc);
-    const [cuisine, set_cuisine] = useState(props.data.cuisine);
-    const [rest_phone, set_rest_phone] = useState(props.data.rest_phone);
-    const [rest_email, set_rest_email] = useState(props.data.rest_email);
-    const [rest_rating, set_rest_rating] = useState(props.data.rest_rating);
-    const [total_tables, set_total_tables] = useState(props.data.total_tables);
-    const [type_2_tables, set_type_2_tables] = useState(props.data.type_2_tables);
-    const [type_4_tables, set_type_4_tables] = useState(props.data.type_4_tables);
-    const [opening_hrs, set_opening_hrs] = useState(props.data.opening_hrs);
-    const [closing_hrs, set_closing_hrs] = useState(props.data.closing_hrs);
+    const [rest_name, set_rest_name] = useState("");
+    const [rest_desc, set_rest_desc] = useState("");
+    const [cuisine, set_cuisine] = useState("");
+    const [rest_phone, set_rest_phone] = useState("");
+    const [rest_email, set_rest_email] = useState("");
+    const [rest_rating, set_rest_rating] = useState("");
+    const [total_tables, set_total_tables] = useState("");
+    const [type_2_tables, set_type_2_tables] = useState("");
+    const [type_4_tables, set_type_4_tables] = useState("");
+    const [opening_hrs, set_opening_hrs] = useState("");
+    const [closing_hrs, set_closing_hrs] = useState("");
+    const [temp_city, set_temp_city] = useState("");
+    const [cities, set_cities] = useState([]);
+
+    const append_place = () => {
+        set_cities((cities) => [...cities, temp_city]);
+        // console.log(cities);
+    }
+
+    // useEffect(() => {
+    //     console.log(cities);
+    //   }, [cities]);
+
+    const deleteCity = (index) => {
+        const t = cities[index];
+        set_cities((cities) => {
+            return cities.filter(city => city !== t)
+        });
+    }
 
     const newData = {
         closing_hrs: closing_hrs,
@@ -25,17 +45,21 @@ export default function EditRest(props) {
         rest_email: rest_email,
         rest_phone: rest_phone,
         rest_name: rest_name,
+        rest_location: cities,
         rest_rating: rest_rating,
         total_tables: total_tables,
         type_2_tables: type_2_tables,
         type_4_tables: type_4_tables
     }
-    
-    const updateFireStore = () => {
-        const docRef = doc(db, "restaurant_details", props.data.rest_id);
-        updateDoc(docRef, newData)
+
+
+    const navigate = useNavigate();
+    const addDataFireStore = () => {
+        const docRef = collection(db, "restaurant_details");
+        addDoc(docRef, newData)
             .then(docRef => {
-                console.log("Success")
+                console.log("Success");
+                navigate("/highprevperson");
             })
             .catch(error => {
                 console.log(error)
@@ -57,9 +81,17 @@ export default function EditRest(props) {
                 <label className="inp-labels-admin">Restaurant email:</label>
                 <input placeholder="Enter email" defaultValue={rest_email} onChange={(e) => set_rest_email(e.target.value)} type="text"></input>
                 <label className="inp-labels-admin">Restaurant available cites:</label>
+                <div>
+                <input placeholder="Enter city" onChange={(e) => set_temp_city(e.target.value)} type="text" />
+                <button onClick={append_place}>Add</button>
                 {
-                    props.data.rest_location.map((location) => { return (<p key={location}>{location},</p>) })
+                    cities.map((city, index) => {
+                        return(
+                            <div key={index} className="place-multi-inp"><p>{city}</p><button className="clear-multi-inp" onClick={() => deleteCity(index)}>x</button></div>
+                        )
+                    })
                 }
+                </div>
                 <label className="inp-labels-admin">Restaurant rating:</label>
                 <input type="text" placeholder="Enter rating" defaultValue={rest_rating} onChange={(e) => set_rest_rating(e.target.value)} />
                 <label className="inp-labels-admin">Total tables:</label>
@@ -73,7 +105,7 @@ export default function EditRest(props) {
                 <label className="inp-labels-admin">Closing hours:</label>
                 <input type="time" placeholder="Closing hours" defaultValue={closing_hrs} onChange={(e) => set_closing_hrs(e.target.value)} />
             </div>
-            <button className="update-rest" onClick={updateFireStore}>Update</button>
+            <button className="update-rest" onClick={addDataFireStore}>Add</button>
         </div>
     )
 }

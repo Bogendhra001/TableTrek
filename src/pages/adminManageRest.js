@@ -24,7 +24,11 @@ export default function ManageRestaurant(props) {
     const navigate = useNavigate();
     const getRestInfo = (rest) => {
         props.passData(rest);
-        navigate("/highprevperson/editrest")
+        navigate("/highprevperson/editrest");
+    }
+
+    const createNewRest = () => {
+        navigate("/highprevperson/newrest");
     }
 
     return(
@@ -34,25 +38,25 @@ export default function ManageRestaurant(props) {
                 <table className="table-rest">
                     <thead>
                         <tr className="table-header">
-                            <th>Restaurant ID</th>
                             <th>Restaurant Name</th>
                             <th>Restaurant Description</th>
+                            <th>Restaurant Rating</th>
                         </tr>
                     </thead>
                     <tbody>
                     {
                         restData.map( (rest) => { return (
                             <tr key={rest.id} className="table-row" onClick={() => getRestInfo(rest)}>
-                                <td className="table-data">{rest.id}</td>
                                 <td className="table-data">{rest.rest_name}</td>
                                 <td className="table-data">{rest.rest_desc}</td>
+                                <td className="table-data">{rest.rest_rating}</td>
                             </tr>
                             )
                         } )
                     }
                     </tbody>
                 </table>
-                <button className="add-btn">+</button>
+                <button className="add-btn" onClick={createNewRest}>+</button>
             </div>
         </div>
     )

@@ -43,7 +43,7 @@
     margin-right: 5rem;
   }
 
-button {
+.initial-button {
     background-color: black;
     color: white;
     cursor: pointer;
