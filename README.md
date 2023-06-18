@@ -16,7 +16,7 @@ start application
 
 We have an admin page where the admin can add new restaurants or edit the existing restaurants to the application 
 
-link: <url>/highprevperson
+link: https://tabletrek.vercel.app/highprevperson
 email: adminpeople@tabletrek.com
 password: @dWinPeople
 
