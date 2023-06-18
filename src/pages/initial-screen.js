@@ -41,7 +41,9 @@ export default function InitialScreen(props) {
           array.push(data[i]["rest_email"]);
           array.push(data[i]["rest_phone"]);
           array.push(data[i]["rest_rating"]);
-          array.push(data[i]["rest_location"])
+
+          array.push(data[i]["rest_location"]);
+
           array.push(data[i]["total_tables"]);
           main_array.push(array);
         }
