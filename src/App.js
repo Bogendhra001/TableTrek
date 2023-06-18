@@ -5,6 +5,7 @@ import Admin from './pages/admin';
 import EditRest from './pages/adminEditRest';
 import { useState } from 'react';
 import Booking from './pages/Booking';
+import SlotBook from './pages/SlotBooking';
 
 function App() {
 
@@ -36,6 +37,7 @@ function App() {
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
         <Route path="/booking" Component={() => <Booking bookdata={bookdata} />} /> 
+        {/* <Route path="slotselect" Component={()=><SlotBook slotdata={slotdata}/>}/> */}
       </Routes>
     </Router>
   );
