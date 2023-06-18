@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import { useEffect } from "react";
 import React,{ useState } from "react";
 import './interface.css';
+import { useNavigate } from "react-router-dom";
 
 
 export default function Booking(props){
@@ -17,11 +18,16 @@ export default function Booking(props){
     
     console.log("Booking Screen",props.bookdata);
 
+    const navigate = useNavigate();
+    const navToHome = () => {
+        navigate('/');
+    }
+
     return(
         <div className="bg">
             <div className="sideBar" id="sidebarBox" style={{display:style}} >
             <img className="x-btn" src='x.png' alt="Menu" onClick={hide}></img>
-                <p>Home</p><p>Manage Reservations</p><p>About Us</p><p>Contact Us</p>
+                <p className="menu-btns" onClick={navToHome}>Home</p><p className="menu-btns">Contact Us</p>
             </div>
             <div className="head1"><img className="menu-btn" src='menuW.png' alt="Menu" onClick={show} ></img><div className="head-text1"><h1 >TableTrek</h1></div></div>
             <div className="Container">
