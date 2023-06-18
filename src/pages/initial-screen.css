@@ -125,3 +125,7 @@ p,h3{
     width: 40px;
     margin:0.5vh;
 }
+
+.menu-btns:hover {
+    cursor: pointer;
+}

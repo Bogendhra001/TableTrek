@@ -96,3 +96,7 @@
     margin-top: 0.2rem;
 
 }
+
+.menu-btns:hover {
+    cursor: pointer;
+}
