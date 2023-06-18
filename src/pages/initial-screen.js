@@ -82,7 +82,7 @@ export default function InitialScreen(props) {
       {/* <div className="title">TABLE TREK</div> */}
       <div class="sideBar" id="sidebarBox" style={{display:style}}>
             <img class="x-btn" src='x.png' alt="Menu" onClick={hide}></img>
-                <p>Home</p><p>Manage Reservations</p><p>About Us</p><p>Contact Us</p>
+                <p className="menu-btns">Home</p><p className="menu-btns">Contact Us</p>
             </div>
             <div class="head"><img class="menu-btn" src='menu.png' alt="Menu" onClick={show} ></img><div class="head-text"><h1>TableTrek</h1></div></div>
       <div className="main">
