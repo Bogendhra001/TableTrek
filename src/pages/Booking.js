@@ -3,6 +3,7 @@ import { db } from "../firebase";
 import { useEffect } from "react";
 import React,{ useState } from "react";
 import './interface.css';
+import { json } from "react-router-dom";
 
 
 export default function Booking(props){
@@ -14,8 +15,28 @@ export default function Booking(props){
     const show=()=>{
         setStyle('block');
     }
-    
-    console.log("Booking Screen",props.bookdata);
+
+    const A=[];
+    function timeA(){
+        for(var i=0; i<=14 ;i++){
+            A.push(i);
+        }
+    }
+    timeA();
+
+    // const [items, setItems] = useState([]);
+
+    // useEffect(() => {
+    // localStorage.setItem('items', JSON.stringify(props.bookdata));
+    // }, [items]);
+
+
+    // 
+    if(props.bookdata.Length!=0){
+        window.localStorage.setItem('main',JSON.stringify(props.bookdata));
+        // console.log(window.localStorage(getItem('main')));
+    }
+
 
     return(
         <div className="bg">
@@ -46,10 +67,14 @@ export default function Booking(props){
                     </select>
                     <br></br>
                     <label for="time">Time:</label><select class="time">
-                        <option value="1">10:00</option>
-                        <option value="2">11:00</option>
-                        <option value="3">12:00</option>
-                        <option value="4">13:00</option>
+                        {
+                            A.map((i)=>{
+                                return(
+                                    <option value={i}>{8+i}:00</option>
+                                )
+                            })
+
+                        }
                     </select><br></br><br></br>
                     <button onClick='{}'>Check Availability</button>
                     </form>
