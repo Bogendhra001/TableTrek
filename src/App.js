@@ -33,11 +33,11 @@ function App() {
   return (
     <Router>
       <Routes>
+        <Route path='/user_details' Component={Details}/>
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
         <Route path="/booking" Component={() => <Booking bookdata={bookdata} />} /> 
-        <Route path='/user_details' Component={Details}/>
       </Routes>
     </Router>
   );
