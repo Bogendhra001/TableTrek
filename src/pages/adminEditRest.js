@@ -2,6 +2,7 @@ import { db } from "../firebase";
 import "../styles/adminEditRest.css";
 import { useState } from "react";
 import { doc, updateDoc } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 
 export default function EditRest(props) {
 
@@ -12,8 +13,7 @@ export default function EditRest(props) {
     const [rest_email, set_rest_email] = useState(props.data.rest_email);
     const [rest_rating, set_rest_rating] = useState(props.data.rest_rating);
     const [total_tables, set_total_tables] = useState(props.data.total_tables);
-    const [type_2_tables, set_type_2_tables] = useState(props.data.type_2_tables);
-    const [type_4_tables, set_type_4_tables] = useState(props.data.type_4_tables);
+    // const [type_4_tables, set_type_4_tables] = useState(props.data.type_4_tables);
     const [opening_hrs, set_opening_hrs] = useState(props.data.opening_hrs);
     const [closing_hrs, set_closing_hrs] = useState(props.data.closing_hrs);
 
@@ -26,16 +26,18 @@ export default function EditRest(props) {
         rest_phone: rest_phone,
         rest_name: rest_name,
         rest_rating: rest_rating,
-        total_tables: total_tables,
-        type_2_tables: type_2_tables,
-        type_4_tables: type_4_tables
+        total_tables: total_tables
+        // total_tables: total_tables,
+        // type_4_tables: type_4_tables
     }
     
+    const navigate = useNavigate();
     const updateFireStore = () => {
         const docRef = doc(db, "restaurant_details", props.data.rest_id);
         updateDoc(docRef, newData)
             .then(docRef => {
-                console.log("Success")
+                console.log("Success");
+                navigate("/highprevperson");
             })
             .catch(error => {
                 console.log(error)
@@ -64,10 +66,8 @@ export default function EditRest(props) {
                 <input type="text" placeholder="Enter rating" defaultValue={rest_rating} onChange={(e) => set_rest_rating(e.target.value)} />
                 <label className="inp-labels-admin">Total tables:</label>
                 <input type="number" placeholder="Total tables" defaultValue={total_tables} onChange={(e) => set_total_tables(e.target.value)} />
-                <label className="inp-labels-admin">Type 2 tables:</label>
-                <input type="number" placeholder="Total tables" defaultValue={type_2_tables} onChange={(e) => set_type_2_tables(e.target.value)} />
-                <label className="inp-labels-admin">Type 4 tables:</label>
-                <input type="number" placeholder="Total tables" defaultValue={type_4_tables} onChange={(e) => set_type_4_tables(e.target.value)} />
+                {/* <label className="inp-labels-admin">Type 4 tables:</label>
+                <input type="number" placeholder="Total tables" defaultValue={type_4_tables} onChange={(e) => set_type_4_tables(e.target.value)} /> */}
                 <label className="inp-labels-admin">Opening hours:</label>
                 <input type="time" placeholder="Opening hours" defaultValue={opening_hrs} onChange={(e) => set_opening_hrs(e.target.value)} />
                 <label className="inp-labels-admin">Closing hours:</label>
