@@ -6,6 +6,8 @@ import AdminHomePage from "./adminHomePage";
 
 export default function Admin(props) {
 
+    
+
     const [email, setEmail] = useState("adminpeople@tabletrek.com");
     const [password, setPassword] = useState("@dWinPeople");
 
@@ -18,6 +20,7 @@ export default function Admin(props) {
             // Signed in
             console.log("done");
             setAdminStat(1);
+            localStorage.setItem('isLoggedIn', true);
         })
         .catch((error) => {
             const errorCode = error.code;
@@ -30,7 +33,7 @@ export default function Admin(props) {
         props.passData(data);
     }
 
-    if (adminStat == 1) {
+    if (adminStat == 1 || localStorage.getItem('isLoggedIn')) {
         return(
             <AdminHomePage passData={passData} />
         )

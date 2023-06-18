@@ -1,0 +1,59 @@
+.edit-restaurants {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    /* margin: 0.01rem 0; */
+}
+.edit-form {
+    display: flex;
+    flex-direction: column;
+    width: 50rem;
+    margin: 0 auto;
+    font-size: 1.3rem;
+    height: fit-content;
+    /* justify-content: center; */
+    /* height: 100%; */
+}
+
+.edit-form > input {
+    font-size: 1rem;
+    
+}
+
+.inp-labels-admin {
+    margin-top: 1rem;
+}
+
+.update-rest {
+    height: 3rem;
+    width: 6rem;
+    border-radius: 30px;
+    border: none;
+}
+
+.update-rest:hover {
+    cursor: pointer;
+}
+
+.place-multi-inp {
+    font-size: 1rem;
+    background-color: #ccc;
+    width: fit-content;
+    padding: 4px 0;
+    border-radius: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 2rem;
+}
+
+.clear-multi-inp {
+    background-color: #ccc;
+    width: fit-content;
+    border: none;
+    color: black;
+    padding: 0 1rem;
+    height: fit-content;
+}
