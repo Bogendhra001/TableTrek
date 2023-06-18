@@ -8,8 +8,8 @@ export default function Admin(props) {
 
     
 
-    const [email, setEmail] = useState("adminpeople@tabletrek.com");
-    const [password, setPassword] = useState("@dWinPeople");
+    const [email, setEmail] = useState("");
+    const [password, setPassword] = useState("");
 
     const [adminStat, setAdminStat] = useState(0);
 
