@@ -7,29 +7,42 @@ import Booking from "./Booking";
 import React, { useState } from 'react';
 import "./initial-screen.css";
 import { useNavigate, useNavigation } from "react-router";
+import { getStorage, ref ,getDownloadURL} from 'firebase/storage';
 
 
 
 export default function InitialScreen(props) {
+  
+  // all global variables
   const [array, setArray] = useState([]);
+  const[length,setLength]=useState();
+  const[image,setImage]=useState([]);
+  
+
+
+
   const getData = async () => {
     await getDocs(collection(db, "restaurant_details"))
       .then((query) => {
         const data = query.docs.map((doc) => ({ ...doc.data(), id: doc.id }));
         const main_array = [];
+        setLength(data.length);
+        console.log(image);
         for (let i = 0; i < data.length; i++) {
           const array = [];
+          console.log("data all",data);
           array.push(data[i]["rest_name"]);
           array.push(data[i]["cuisine"]);
           array.push(data[i]["opening_hrs"]);
           array.push(data[i]["closing_hrs"]);
           array.push(data[i]["rest_id"]);
-          array.push(data[i]["rest_img"]);
+          array.push("https://firebasestorage.googleapis.com/v0/b/tabletrek-d34d2.appspot.com/o/images%2F"+data[i]["rest_id"].toString()+".jpg?alt=media&token=47db52d6-e454-4aad-acc2-f6c4f3745e0f");
           array.push(data[i]["rest_desc"]);
           array.push(data[i]["rest_email"]);
           array.push(data[i]["rest_phone"]);
           array.push(data[i]["rest_rating"]);
-          array.push(data[i]["rest_location"]);
+          array.push(data[i]["rest_location"])
+          array.push(data[i]["total_tables"]);
           main_array.push(array);
         }
         setArray(main_array);
@@ -44,14 +57,33 @@ export default function InitialScreen(props) {
   }
 
   useEffect(() => {
+    // const loadImageData = async () => {
+    //   const img = [];
+    //   const storage = getStorage();
+    //   for (let i = 0; i < 4; i++) {
+    //     const storageRef = ref(storage, `images/${i}.jpg`);
+    //     try {
+    //       const url = await getDownloadURL(storageRef);
+    //       img.push(url);
+    //       console.log(img);
+    //     } catch (error) {
+    //       console.log('Error getting download URL:', error);
+    //     }
+    //   }
+    //   console.log("seting data in image");
+    //   setImage(img);
+    //   console.log("data setting finish");
+    //   getData();
+    // };
     getData();
+    // loadImageData();
   }, []);
 
   const listItems = array.map((l) => (
     <li key={l[4]} className="list-group-item">
       <div className="list">
         <div className="img">
-          <img src="https://th.bing.com/th/id/OIP.5HuchsFg1k7rxtV1fc1VvwHaFf?pid=ImgDet&rs=1" alt="restaurant"></img>
+          <img src={l[5]} alt="restaurant"></img>
           <div>
             <h3>{l[0]}</h3>
             <p>{l[6]}</p>
