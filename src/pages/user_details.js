@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import './interface.css';
 import "./details.css";
 import { useNavigate } from "react-router-dom";
 import { collection, addDoc } from 'firebase/firestore';
@@ -8,9 +7,9 @@ import { db } from '../firebase';
 export default function Details(props) {
   const [style, setStyle] = useState('none');
   const [array, setArray] = useState([]);
-  // const [resid,setResid]=useState("");
-  // const [bookingdate,setBookingdata]=useState();
-  // const [bookingtime,setBookingtime]=useState("");
+  const [resid,setResid]=useState("");
+  const [bookingdate,setBookingdata]=useState();
+  const [bookingtime,setBookingtime]=useState("");
   const [user_name, setName] = useState('');
   const [user_email, setEmail] = useState('');
   const [user_phone, setPhone] = useState('');
@@ -20,27 +19,28 @@ export default function Details(props) {
 
   const createFieldsInFirestore = async () => {
     try {
-      // setResid("2Xxxv1FZJosgBdLZgWVf");
-      // setBookingdata(4);
-      // setBookingtime("2023-06-19");
-      const resid="2Xxxv1FZJosgBdLZgWVf";
-      const bookingdate="2023-06-19";
-      const bookingtime=14;
+      console.log(props.bdata);
+      setResid(props.bdata[2]);
+      setBookingdata(props.bdata[0]);
+      setBookingtime(props.bdata[1]);
+      console.log("checking data",resid,bookingdate,bookingtime);
+      // const resid="2Xxxv1FZJosgBdLZgWVf";
+      // const bookingdate="2023-06-19";
+      // const bookingtime=14;
       const collectionRef = collection(db, 'booking_details'); // Replace 'your-collection-name' with the actual name of your collection
-  
       const data = {
         user_name: user_name,
         user_email: user_email,
         user_phone: user_phone,
-        rest_id:resid,
-        booking_date:bookingdate,
-        booking_time:bookingtime,
-        // booking_id:docRef.id,
+        rest_id:props.bdata[2],
+        booking_date:props.bdata[0],
+        booking_time:props.bdata[1],
       };
-  
+      const l=[props.bdata[0],props.bdata[2],props.bdata[1],user_name];
       const docRef = await addDoc(collectionRef, data);
       console.log("done");
       console.log('Document created with ID: ', docRef.id);
+      passdatatonotification(l);
     } catch (error) {
       console.error('Error creating document: ', error);
     }
@@ -76,7 +76,6 @@ export default function Details(props) {
     setArray(arr);
     console.log(arr);
     createFieldsInFirestore();
-    passdatatonotification(arr);
   };
   const navigate=useNavigate();
   function passdatatonotification(array){
