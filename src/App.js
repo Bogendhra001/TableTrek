@@ -52,7 +52,8 @@ const passSlotdata=(sdata)=>{
 }
 
 const passBookinginfo=(bdata)=>{
-  setBookdata(bdata);
+  console.log("booking_data",bdata);
+  setBdata(bdata);
 
 }
 
@@ -61,14 +62,14 @@ console.log("Bdata",bdata);
   return (
     <Router>
       <Routes>
-        <Route path='/user_details' Component={() => <Details passDataToNotification={passDataToNotification}/>}/>
+        <Route path='/user_details' Component={() => <Details bdata={bdata} passDataToNotification={passDataToNotification}/>}/>
         <Route path='/highprevperson' Component={() => <Admin passData={passData} />} />
         <Route path="/highprevperson/editrest" Component={() => <EditRest data={data} />} /> 
         <Route path='/' Component={() => <InitialScreen  passDatatobooking={passDatatobooking}/>} />
         <Route path="/booking" Component={() => <Booking bookdata={bookdata} passSlotdata={passSlotdata}/>} /> 
         <Route path="/slotselect" Component={()=><SlotBook slotdata={sdata} passBookinginfo={passBookinginfo}/>}/>
         <Route path="/highprevperson/newrest" Component={() => <NewRest />} /> 
-        <Route path='/notification' Component={() => <Confirmation userdata={userdata}/>}/>
+        <Route path='/notification' Component={() => <Confirmation userdata={userdata} bookdata={bookdata}/>}/>
       </Routes>
     </Router>
   );

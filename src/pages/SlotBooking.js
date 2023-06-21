@@ -18,9 +18,9 @@ export default function SlotBook(props){
                 console.log("ffetch",resdata);
             })
     }
-    useEffect( () => {
+    useEffect(() => {
         getData();
-    });
+      }, []);
     // console.log("fetch",resdata);
 
     const [style, setStyle] = useState('none');

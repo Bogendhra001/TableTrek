@@ -59,26 +59,7 @@ export default function InitialScreen(props) {
   }
 
   useEffect(() => {
-    // const loadImageData = async () => {
-    //   const img = [];
-    //   const storage = getStorage();
-    //   for (let i = 0; i < 4; i++) {
-    //     const storageRef = ref(storage, `images/${i}.jpg`);
-    //     try {
-    //       const url = await getDownloadURL(storageRef);
-    //       img.push(url);
-    //       console.log(img);
-    //     } catch (error) {
-    //       console.log('Error getting download URL:', error);
-    //     }
-    //   }
-    //   console.log("seting data in image");
-    //   setImage(img);
-    //   console.log("data setting finish");
-    //   getData();
-    // };
     getData();
-    // loadImageData();
   }, []);
 
   const listItems = array.map((l) => (
