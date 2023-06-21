@@ -56,7 +56,7 @@ export default function NewRest() {
 
     const handleImageUpload = async (file, customName) => {
         try {
-          const storageRef = ref(storage, `images/${customName}`);
+          const storageRef = ref(storage, `images/${customName}.jpg`);
           await uploadBytes(storageRef, file);
           console.log("Image uploaded successfully.");
         } catch (error) {
