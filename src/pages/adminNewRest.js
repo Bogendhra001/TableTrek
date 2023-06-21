@@ -78,7 +78,7 @@ export default function NewRest() {
                     .then(doc1 => { console.log("Updated id") })
                 handleImageUpload(file, doct.id);
                 console.log("Success");
-                // navigate("/highprevperson");
+                navigate("/highprevperson");
             })
             .catch(error => {
                 console.log(error)
