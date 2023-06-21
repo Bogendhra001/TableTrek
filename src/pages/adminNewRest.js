@@ -57,7 +57,7 @@ export default function NewRest() {
     const handleImageUpload = async (file, customName) => {
         try {
           const storageRef = ref(storage, `images/${customName}.jpg`);
-          console.log(storageRef);
+          console.log("REF", storageRef);
           await uploadBytes(storageRef, file);
           console.log("Image uploaded successfully.");
         } catch (error) {
@@ -78,7 +78,7 @@ export default function NewRest() {
                     .then(doc1 => { console.log("Updated id") })
                 handleImageUpload(file, doct.id);
                 console.log("Success");
-                navigate("/highprevperson");
+                // navigate("/highprevperson");
             })
             .catch(error => {
                 console.log(error)
